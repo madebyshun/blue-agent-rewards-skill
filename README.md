@@ -7,7 +7,7 @@ Give your users real onchain rewards — without building a token system from sc
 ## Install
 
 ```bash
-npm install @blueagent/rewards-skill
+npm install github:madebyshun/blue-agent-rewards-skill
 ```
 
 ## Quick Start

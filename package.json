@@ -1,5 +1,5 @@
 {
-  "name": "@blueagent/rewards-skill",
+  "name": "blueagent-rewards-skill",
   "version": "0.1.0",
   "description": "Blue Agent rewards skill — earn $BLUEAGENT for any Telegram bot",
   "main": "dist/index.js",
