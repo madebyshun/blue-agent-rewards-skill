@@ -1,0 +1,20 @@
+{
+  "name": "@blueagent/rewards-skill",
+  "version": "0.1.0",
+  "description": "Blue Agent rewards skill — earn $BLUEAGENT for any Telegram bot",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["blueagent", "base", "telegram", "rewards", "crypto"],
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^6.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
