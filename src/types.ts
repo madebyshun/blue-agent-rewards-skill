@@ -34,7 +34,9 @@ export interface ClaimResult {
   walletAddress: string
   tokensUser: bigint
   tokensFee: bigint
+  tokensCreator?: bigint
   txHash?: string
+  txHashCreator?: string
   error?: string
 }
 
@@ -49,7 +51,15 @@ export interface RewardsConfig {
   rewardWalletPrivateKey: string
   rewardWalletAddress: string
   agentId: string
-  feePercent?: number
+  feePercent?: number           // % to Blue Agent treasury (default 5)
+  creatorAddress?: string       // Agent creator wallet — earns creatorFeePercent
+  creatorFeePercent?: number    // % to creator (default 3 if creatorAddress set)
   treasuryAddress?: string
   dataDir?: string
+}
+
+export interface ClaimFeeBreakdown {
+  tokensUser: bigint
+  tokensCreator: bigint
+  tokensTreasury: bigint
 }

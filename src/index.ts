@@ -18,8 +18,11 @@ export class BlueAgentRewards {
   private config: Required<RewardsConfig>
 
   constructor(config: RewardsConfig) {
+    const hasCreator = !!config.creatorAddress
     this.config = {
-      feePercent: 5,
+      feePercent: hasCreator ? 2 : 5,   // 2% treasury if creator set, else 5%
+      creatorAddress: '',
+      creatorFeePercent: hasCreator ? 3 : 0,
       treasuryAddress: DEFAULT_TREASURY,
       dataDir: './data',
       ...config,
@@ -77,11 +80,13 @@ export class BlueAgentRewards {
     }
 
     try {
-      const { txHashUser, txHashFee, amountUser, amountFee } = await this.onchain.transferWithFee(
+      const { txHashUser, txHashFee, txHashCreator, amountUser, amountFee, amountCreator } = await this.onchain.transferWithFee(
         walletAddress,
         this.config.treasuryAddress,
         claimAmount,
-        this.config.feePercent
+        this.config.feePercent,
+        this.config.creatorAddress || undefined,
+        this.config.creatorFeePercent
       )
 
       // Deduct points after successful transfer
@@ -93,7 +98,9 @@ export class BlueAgentRewards {
         walletAddress,
         tokensUser: amountUser,
         tokensFee: amountFee,
+        tokensCreator: amountCreator,
         txHash: txHashUser,
+        txHashCreator: txHashCreator || undefined,
       }
     } catch (e: any) {
       return {

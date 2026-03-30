@@ -34,10 +34,21 @@ export class OnchainService {
     userAddress: string,
     treasuryAddress: string,
     totalAmount: bigint,
-    feePercent: number
-  ): Promise<{ txHashUser: string; txHashFee: string; amountUser: bigint; amountFee: bigint }> {
+    feePercent: number,
+    creatorAddress?: string,
+    creatorFeePercent?: number
+  ): Promise<{
+    txHashUser: string
+    txHashFee: string
+    txHashCreator: string
+    amountUser: bigint
+    amountFee: bigint
+    amountCreator: bigint
+  }> {
+    const creatorPct = creatorAddress && creatorFeePercent ? creatorFeePercent : 0
+    const amountCreator = creatorAddress ? (totalAmount * BigInt(creatorPct)) / 100n : 0n
     const amountFee = (totalAmount * BigInt(feePercent)) / 100n
-    const amountUser = totalAmount - amountFee
+    const amountUser = totalAmount - amountFee - amountCreator
 
     // Check balance
     const balance = await this.getBalance()
@@ -54,6 +65,12 @@ export class OnchainService {
       txHashFee = await this.transfer(treasuryAddress, amountFee)
     }
 
-    return { txHashUser, txHashFee, amountUser, amountFee }
+    // Send to creator
+    let txHashCreator = ''
+    if (creatorAddress && amountCreator > 0n) {
+      txHashCreator = await this.transfer(creatorAddress, amountCreator)
+    }
+
+    return { txHashUser, txHashFee, txHashCreator, amountUser, amountFee, amountCreator }
   }
 }

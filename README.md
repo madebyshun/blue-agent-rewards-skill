@@ -51,7 +51,9 @@ bot.command('claim', async (ctx) => {
 | `rewardWalletPrivateKey` | string | required | Wallet holding $BLUEAGENT to distribute |
 | `rewardWalletAddress` | string | required | Address of reward wallet |
 | `agentId` | string | required | Unique identifier for your agent |
-| `feePercent` | number | `5` | % sent to Blue Agent treasury |
+| `feePercent` | number | `5` (or `2` if creator set) | % sent to Blue Agent treasury |
+| `creatorAddress` | string | — | Agent creator wallet address — earns 3% of every claim |
+| `creatorFeePercent` | number | `3` | % sent to creator (only if `creatorAddress` set) |
 | `treasuryAddress` | string | Blue Agent treasury | Where fees go |
 | `dataDir` | string | `./data` | Directory for user data storage |
 
@@ -98,15 +100,23 @@ const result = await rewards.claim(userId, '0x...')
 
 ## How Fees Work
 
-Every claim is split automatically:
-
+**Without `creatorAddress`:**
 ```
 User claims 1,000,000 $BLUEAGENT
-├── 950,000 → user wallet  (95%)
-└──  50,000 → Blue Agent treasury (5%)
+├── 950,000 → user wallet      (95%)
+└──  50,000 → treasury         (5%)
 ```
 
-Fee goes to Blue Agent treasury, used for burns and ecosystem development.
+**With `creatorAddress`:**
+```
+User claims 1,000,000 $BLUEAGENT
+├── 920,000 → user wallet      (92%)
+├──  30,000 → creator wallet   (3%)
+└──  20,000 → treasury         (2%)
+```
+
+Agent builders earn 3% of every claim — automatically, onchain.
+Treasury fee goes to Blue Agent for burns and ecosystem development.
 
 ## Multipliers
 
