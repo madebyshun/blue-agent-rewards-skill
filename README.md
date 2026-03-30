@@ -52,7 +52,7 @@ bot.command('claim', async (ctx) => {
 | `rewardWalletAddress` | string | required | Address of reward wallet |
 | `agentId` | string | required | Unique identifier for your agent |
 | `feePercent` | number | `5` (or `2` if creator set) | % sent to Blue Agent treasury |
-| `creatorAddress` | string | — | Agent creator wallet address — earns 3% of every claim |
+| `creatorAddress` | string | — | Creator/agent wallet — earns 3% of every claim. Can be a human wallet (project owner) or an agent wallet (autonomous agent) |
 | `creatorFeePercent` | number | `3` | % sent to creator (only if `creatorAddress` set) |
 | `treasuryAddress` | string | Blue Agent treasury | Where fees go |
 | `dataDir` | string | `./data` | Directory for user data storage |
@@ -115,8 +115,49 @@ User claims 1,000,000 $BLUEAGENT
 └──  50,000 → treasury         (5%)
 ```
 
-Agent builders earn 3% of every claim — automatically, onchain.
-Treasury fee goes to Blue Agent for burns and ecosystem development.
+`creatorAddress` can be:
+- **A human wallet** — project owner earns 3% from their community
+- **An agent wallet** — autonomous agent earns 3% and self-funds operations
+
+The more users claim, the more the creator/agent earns — automatically, onchain, no manual intervention.
+
+Treasury fee goes to Blue Agent for ecosystem development and token burns.
+
+## Use Cases
+
+**1. Community Bot (human creator)**
+```typescript
+// Project owner earns 3% from their community
+const rewards = new BlueAgentRewards({
+  agentId: 'my-project-bot',
+  rewardWalletPrivateKey: '...',
+  rewardWalletAddress: '...',
+  creatorAddress: '0xPROJECT_OWNER_WALLET',
+})
+```
+
+**2. Autonomous Agent**
+```typescript
+// Agent has its own wallet and earns 3% to self-fund operations
+const rewards = new BlueAgentRewards({
+  agentId: 'my-ai-agent',
+  rewardWalletPrivateKey: '...',
+  rewardWalletAddress: '...',
+  creatorAddress: '0xAGENT_WALLET', // agent's own wallet
+})
+// The more users claim → the more the agent earns → agent self-sustains
+```
+
+**3. No creator (pure community)**
+```typescript
+// 95% user / 5% treasury — no one earns extra
+const rewards = new BlueAgentRewards({
+  agentId: 'my-bot',
+  rewardWalletPrivateKey: '...',
+  rewardWalletAddress: '...',
+  // no creatorAddress
+})
+```
 
 ## Multipliers
 
