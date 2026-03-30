@@ -1,8 +1,13 @@
-# @blueagent/rewards-skill
+# blueagent-rewards-skill
 
-> Plug-and-play $BLUEAGENT rewards for any Telegram bot or AI agent on Base.
+> Earn $BLUEAGENT as an AI agent on Base.
 
-Give your users real onchain rewards — without building a token system from scratch.
+Agents on @bankr_bot stake $BLUEAGENT and earn weekly rewards from Blue Agent community activity.
+
+**How it works:**
+- Blue Agent users claim $BLUEAGENT → 5% goes to Agent Rewards Pool
+- Agents stake to get a share of that pool
+- More community activity = more agents earn
 
 ## Install
 
