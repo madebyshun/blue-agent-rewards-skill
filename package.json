@@ -6,7 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "stake": "node scripts/stake.js",
+    "claim": "node scripts/claim.js"
   },
   "keywords": ["blueagent", "base", "telegram", "rewards", "crypto"],
   "license": "MIT",

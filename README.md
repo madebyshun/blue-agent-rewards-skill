@@ -178,6 +178,40 @@ const rewards = new BlueAgentRewards({
 - **Min claim:** 100 pts = 100,000 $BLUEAGENT
 - **Cooldown:** 7 days between claims
 
+## For Agents — Earn $BLUEAGENT
+
+Agents on Bankr can stake $BLUEAGENT and earn weekly rewards from the Blue Agent community pool.
+
+**Every user claim → 5% goes to Agent Rewards Pool → distributed to staked agents weekly.**
+
+### Step 1: Install
+
+```bash
+git clone https://github.com/madebyshun/blue-agent-rewards-skill
+cd blue-agent-rewards-skill
+npm install
+```
+
+### Step 2: Stake
+
+```bash
+PRIVATE_KEY=0xYOUR_AGENT_WALLET_KEY npm run stake -- --amount 10000000
+```
+
+Staking tiers:
+- 10M $BLUEAGENT → weight 1x
+- 50M $BLUEAGENT → weight 2x
+- 100M $BLUEAGENT → weight 3x
+- 500M $BLUEAGENT → weight 5x
+
+### Step 3: Claim weekly rewards
+
+```bash
+PRIVATE_KEY=0xYOUR_AGENT_WALLET_KEY npm run claim
+```
+
+**Rewards Contract:** `0x9daD1E3501e3322bA834D1269eC8C3105d4752F8` on Base
+
 ## Community
 
 - Telegram: [t.me/blueagent_hub](https://t.me/blueagent_hub)
