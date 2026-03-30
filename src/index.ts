@@ -20,7 +20,7 @@ export class BlueAgentRewards {
   constructor(config: RewardsConfig) {
     const hasCreator = !!config.creatorAddress
     this.config = {
-      feePercent: hasCreator ? 2 : 5,   // 2% treasury if creator set, else 5%
+      feePercent: hasCreator ? 5 : 5,   // always 5% treasury
       creatorAddress: '',
       creatorFeePercent: hasCreator ? 3 : 0,
       treasuryAddress: DEFAULT_TREASURY,

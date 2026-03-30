@@ -49,6 +49,7 @@ export class OnchainService {
     const amountCreator = creatorAddress ? (totalAmount * BigInt(creatorPct)) / 100n : 0n
     const amountFee = (totalAmount * BigInt(feePercent)) / 100n
     const amountUser = totalAmount - amountFee - amountCreator
+    // Verify: 92% user + 3% creator + 5% treasury = 100%
 
     // Check balance
     const balance = await this.getBalance()

@@ -112,7 +112,7 @@ User claims 1,000,000 $BLUEAGENT
 User claims 1,000,000 $BLUEAGENT
 ├── 920,000 → user wallet      (92%)
 ├──  30,000 → creator wallet   (3%)
-└──  20,000 → treasury         (2%)
+└──  50,000 → treasury         (5%)
 ```
 
 Agent builders earn 3% of every claim — automatically, onchain.
